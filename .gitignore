@@ -15,7 +15,7 @@
 # 3. Re-open the skeleton directories so Git can traverse them.
 !/assets/
 !/credentials/
-!/devices/
+!/infrastructure/
 !/inbox/
 !/outbox/
 
@@ -25,8 +25,8 @@
 !/assets/**/.gitkeep
 /credentials/**
 !/credentials/.gitkeep
-/devices/**
-!/devices/.gitkeep
+/infrastructure/**
+!/infrastructure/.gitkeep
 /inbox/**
 !/inbox/.gitkeep
 /outbox/**

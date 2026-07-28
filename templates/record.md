@@ -2,9 +2,11 @@
 type: record
 title:
 kind:            # directory | file | repository | dataset | service-data | physical
-device:          # codename of the entry in devices/ (plain text, not a wikilink:
-                 # devices/ lies outside the Obsidian root)
-path:            # absolute path or locator on that device
+location:        # codename of the entry in infrastructure/ that holds the asset
+                 # (plain text, not a wikilink: infrastructure/ lies outside the
+                 # Obsidian root). Must be a machine or storage entry, never a
+                 # domain or account.
+path:            # absolute path or locator at that location
 size:            # approximate, e.g. 12G
 access:          # how to reach it, e.g. ssh, mounted volume, https endpoint
 remote:          # upstream URL if the asset is a clone or mirror; omit otherwise

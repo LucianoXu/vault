@@ -4,8 +4,8 @@ This file describes the design, structure and operations of the Vault system.
 The Vault system works as the digital database and control center for the user. The user identity is preserved in `USER.md`.
 
 The Vault system supports distributed storage and computation. 
-`devices/` contains textual descriptions of reachable devices (machine, storage, etc.), each as a file.
-We say the Vault system **owns** an asset if the asset content is located directly in the folder. The Vault can also **record** a reference to the asset, which is a markdown file describing the content and device / location information.
+`infrastructure/` contains textual descriptions of the external entities the user holds but whose content the Vault does not own — machines, storage, domains, cloud accounts — each as a file.
+We say the Vault system **owns** an asset if the asset content is located directly in the folder. The Vault can also **record** a reference to the asset, which is a markdown file describing the content and its location.
 
 The entire vault will be synchronized by *Syncthing*. The Vault system skeleton itself is tracked by *Git*.
 The Vault system is expected to be operated by both human and AI. 
