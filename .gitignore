@@ -1,0 +1,37 @@
+# The Vault repository tracks the framework, never the instance data.
+# The rules below deny by default: anything new is untracked unless allowed here.
+
+# 1. Deny everything at the root.
+/*
+
+# 2. Framework files.
+!/.gitignore
+!/.stignore
+!/AGENTS.md
+!/CLAUDE.md
+!/README.md
+!/templates/
+
+# 3. Re-open the skeleton directories so Git can traverse them.
+!/assets/
+!/credentials/
+!/devices/
+!/inbox/
+!/outbox/
+
+# 4. Inside the skeleton: ignore all content, keep only the directory markers.
+/assets/**
+!/assets/**/
+!/assets/**/.gitkeep
+/credentials/**
+!/credentials/.gitkeep
+/devices/**
+!/devices/.gitkeep
+/inbox/**
+!/inbox/.gitkeep
+/outbox/**
+!/outbox/.gitkeep
+
+# 5. OS and tooling junk.
+.DS_Store
+__pycache__/

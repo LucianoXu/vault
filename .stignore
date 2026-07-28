@@ -1,0 +1,16 @@
+// Git metadata: syncing a live repository across devices corrupts the index
+.git
+
+// OS junk
+.DS_Store
+Thumbs.db
+
+// Obsidian machine-local state (do not sync window/pane layout across devices)
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.trash
+
+// Editor / temp / lock files
+*.tmp
+~$*
+.~lock.*
