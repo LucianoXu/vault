@@ -1,5 +1,7 @@
-// Git metadata: syncing a live repository across devices corrupts the index
-.git
+// The Vault's own Git metadata: syncing a live repository across devices
+// corrupts the index. Anchored to the root on purpose — an unanchored `.git`
+// would also strip the history of every project repository kept under assets/.
+/.git
 
 // OS junk
 .DS_Store

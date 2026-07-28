@@ -22,7 +22,7 @@ last-verified:    # YYYY-MM-DD
 ## Long-term Directions
 
 <!-- Ongoing commitments with a standard to maintain.
-     These should correspond to the folders under assets/areas/. -->
+     These should correspond to the folders under assets/2-areas/. -->
 
 ## Working Preferences
 

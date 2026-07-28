@@ -20,9 +20,12 @@
 !/outbox/
 
 # 4. Inside the skeleton: ignore all content, keep only the directory markers.
+#    Only the four PARA directories plus 0-cards/ are re-opened, never deeper:
+#    a directory that is not ignored and holds its own .git would otherwise be
+#    staged as an embedded repository by `git add .`.
 /assets/**
-!/assets/**/
-!/assets/**/.gitkeep
+!/assets/*/
+!/assets/*/.gitkeep
 /credentials/**
 !/credentials/.gitkeep
 /infrastructure/**
