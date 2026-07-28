@@ -34,9 +34,8 @@ The PARA component contains the `projects/`, `areas/`, `resources/`, `archive/` 
   internal structure it had while active and is not reorganized. Its folder takes a `YYYYMMDD_`
   prefix recording when it went inactive.
 
-The Zettelkasten component is in `cards/`. `cards/` follows the structure of an *Obsidian* project, where markdowns with links forms the knowledge web. In our vault, we can also have links to the PARA contents.
+The Zettelkasten component is in `cards/`. `cards/` follows the structure of an *Obsidian* project, where markdowns with links form the knowledge web. Our vault is not constrained by Obsidian functionality and we can also have links to other contents outside `cards/`.
 
-- The Obsidian vault root is `assets/`.
 - A card is named `YYYYMMDD Title.md`.
 - Cards are categorized as fleeting or permanent, and labelled by YAML frontmatter (type: fleeting|permanent).
 - Fleeting cards should be processed within 48h, either dropped or transformed into permanent cards.
