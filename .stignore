@@ -3,9 +3,11 @@
 // would also strip the history of every project repository kept under assets/.
 /.git
 
-// OS junk
-.DS_Store
-Thumbs.db
+// OS junk. The (?d) prefix lets Syncthing delete these when it removes a
+// directory that a remote device deleted — without it, leftover junk keeps the
+// directory non-empty and the folder stays permanently out of sync.
+(?d).DS_Store
+(?d)Thumbs.db
 
 // Obsidian machine-local state (do not sync window/pane layout across devices)
 .obsidian/workspace.json
@@ -13,6 +15,6 @@ Thumbs.db
 .trash
 
 // Editor / temp / lock files
-*.tmp
-~$*
-.~lock.*
+(?d)*.tmp
+(?d)~$*
+(?d).~lock.*
