@@ -36,9 +36,28 @@ The PARA component contains the `1-projects/`, `2-areas/`, `3-resources/`, `4-ar
 
 The Zettelkasten component is in `0-cards/`. `0-cards/` follows the structure of an *Obsidian* project, where markdowns with links form the knowledge web. Our vault is not constrained by Obsidian functionality and we can also have links to other contents outside `0-cards/`.
 
-- A card is named `YYYYMMDD Title.md`.
+- A card is named `YYYYMMDD Title.md` (creation date).
 - Cards are categorized as fleeting or permanent, and labelled by YAML frontmatter (type: fleeting|permanent).
 - Fleeting cards should be processed within 48h, either dropped or transformed into permanent cards.
+
+
+## Naming
+
+A name is an identifier before it is a label: it must say what the entry holds, so the entry
+can be found without being opened.
+
+- **English names use PascalCase** — no spaces, hyphens or underscores. Acronyms and brand names keep their own capitalisation.
+- **Chinese names stay in Chinese** and take no case convention.
+- Names must survive nesting: stay under 60 characters, never exceed 100.
+
+
+## Synchronization
+
+- **Pause the folder before any bulk rename or move.** Under a live watcher every file becomes its
+  own index event. Pause, change, rescan once, resume.
+- **A case-only rename needs an intermediate step.** macOS is case-insensitive.
+- **Local status does not report remote health.** A device sits at `idle` with no errors while a
+  replica retries the same pull forever. Check `db/completion` per device, not folder state.
 
 
 ## Credentials
