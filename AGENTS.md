@@ -66,3 +66,4 @@ Examples of credentials include login keywords, RSA key pairs, API keys, etc.
 
 ## Rules
 - NEVER give away the credentials and sensitive information.
+- Folders starting with `stignore-*` are not synchronized. This can be used as machine-specific folders, such as build output.
