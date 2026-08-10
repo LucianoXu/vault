@@ -18,3 +18,18 @@
 (?d)*.tmp
 (?d)~$*
 (?d).~lock.*
+
+// Lean/Lake build artifacts (multi-GB, machine-local; e.g. assets/1-projects/PQCPlus/Formalization)
+(?d)**/.lake
+
+// Python virtual environments. The interpreter and the compiled wheels inside
+// are platform-specific, so a venv replicated from macOS to Linux is not merely
+// redundant but broken on arrival.
+(?d)**/.venv
+
+// General opt-out: anything named stignore-* stays on the machine that made it.
+// Point build tools here (latexmk `$out_dir`, and so on) whenever their output
+// is derived, rewritten wholesale on every run, and therefore guaranteed to
+// collide between two replicas. The name states its own purpose, so an
+// unfamiliar directory needs no lookup to be understood.
+(?d)**/stignore-*
