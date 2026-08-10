@@ -29,7 +29,7 @@ The PARA component organizes actual projects, codebase and materials, while the 
 The PARA component contains the `1-projects/`, `2-areas/`, `3-resources/`, `4-archive/` folders. In particular,
 - `1-projects/` contains the ongoing works that have a clear deadline or target.
 - `2-areas/` contains ongoing responsibilities with a standard to maintain (no end date), e.g. research, health, finances. 
-- `3-resources/` contains the external materials that are helpful.
+- `3-resources/` contains the static materials that are helpful.
 - `4-archive/` preserves the static projects or areas as they are. An archived entry keeps the
   internal structure it had while active and is not reorganized. Its folder takes a `YYYYMMDD_`
   prefix recording when it went inactive.
