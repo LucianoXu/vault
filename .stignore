@@ -7,7 +7,15 @@
 // directory that a remote device deleted — without it, leftover junk keeps the
 // directory non-empty and the folder stays permanently out of sync.
 (?d).DS_Store
+(?d)._*
+(?d).Spotlight-V100
+(?d).Trashes
+(?d).fseventsd
+(?d).TemporaryItems
+(?d).apdisk
 (?d)Thumbs.db
+(?d)desktop.ini
+(?d)$RECYCLE.BIN
 
 // Obsidian machine-local state (do not sync window/pane layout across devices)
 .obsidian/workspace.json
@@ -18,6 +26,17 @@
 (?d)*.tmp
 (?d)~$*
 (?d).~lock.*
+(?d)*.swp
+(?d)*.swo
+
+// ---------------------------------------------------------------------------
+// Machine-local build output and dependency trees.
+//
+// Two replicas that build the same artefact rewrite it in full and
+// independently, which Syncthing can only read as a concurrent edit — a
+// guaranteed conflict, not a race that better timing would win. Everything
+// below is derived: deleting it costs a rebuild, never a source file.
+// ---------------------------------------------------------------------------
 
 // Lean/Lake build artifacts (multi-GB, machine-local; e.g. assets/1-projects/PQCPlus/Formalization)
 (?d)**/.lake
@@ -27,9 +46,75 @@
 // redundant but broken on arrival.
 (?d)**/.venv
 
+// Node dependency trees. Reinstallable from the lockfile, and large enough by
+// file count to dominate the folder index on their own.
+(?d)**/node_modules
+
+// Python bytecode and tool caches. The .pyc magic number is tied to the
+// interpreter version, so these are wrong rather than merely stale on a replica
+// running a different Python.
+(?d)**/__pycache__
+(?d)*.pyc
+(?d)**/.pytest_cache
+(?d)**/.mypy_cache
+(?d)**/.ruff_cache
+(?d)**/.ipynb_checkpoints
+(?d)**/.tox
+(?d)**/*.egg-info
+
+// Visual Studio / MSBuild leftovers, from the archived C++ coursework. Records
+// of one machine's build environment: absolute include paths, incremental-build
+// state, per-user window layout.
+(?d)**/.vs
+(?d)**/*.tlog
+(?d)*.vcxproj.user
+(?d)*.suo
+
 // General opt-out: anything named stignore-* stays on the machine that made it.
 // Point build tools here (latexmk `$out_dir`, and so on) whenever their output
 // is derived, rewritten wholesale on every run, and therefore guaranteed to
 // collide between two replicas. The name states its own purpose, so an
 // unfamiliar directory needs no lookup to be understood.
 (?d)**/stignore-*
+
+// LaTeX intermediates, regenerated in full by every compile. Named after the
+// document, so two machines building the same paper collide on all of them at
+// once.
+//
+// Four extensions are deliberately absent. .bbl is what an arXiv submission
+// ships and the output .pdf is often the artefact being shared, so neither is
+// disposable. .log and .out name a LaTeX intermediate here but a job's stdout
+// or a compiled binary elsewhere; no pattern distinguishes the two, and an
+// exemption list that has to enumerate every directory holding real results is
+// a rule that fails silently the first time one is forgotten. Both stay in the
+// sync set, and a document built on two machines at once is kept out of
+// conflict the same way everything else is: by pointing $out_dir at
+// stignore-*.
+(?d)*.aux
+(?d)*.bcf
+(?d)*.blg
+(?d)*.brf
+(?d)*.fdb_latexmk
+(?d)*.fls
+(?d)*.idx
+(?d)*.ilg
+(?d)*.ind
+(?d)*.lof
+(?d)*.lot
+(?d)*.nav
+(?d)*.run.xml
+(?d)*.snm
+(?d)*.synctex.gz
+(?d)*.toc
+(?d)*.vrb
+(?d)*.xdv
+
+// Zotero's regenerable state, beside the library in assets/2-areas/Zotero. The
+// full-text cache is re-extracted per machine; the SQLite journal and WAL are
+// transaction state, and a mid-write snapshot of them is precisely what turns a
+// replicated database into a corrupt one.
+(?d)**/.zotero-ft-cache
+(?d)**/.zotero-ft-info
+(?d)zotero.sqlite-journal
+(?d)zotero.sqlite-wal
+(?d)zotero.sqlite-shm
