@@ -50,6 +50,35 @@ can be found without being opened.
 - **Chinese names stay in Chinese** and take no case convention.
 - Names must survive nesting: stay under 60 characters, never exceed 100.
 
+### Names must be legal on every replica
+
+The Vault replicates to Windows (NTFS), so a name is only valid if Windows accepts it.
+The Unix replicas accept far more than NTFS does, which makes this failure silent from macOS or
+Linux: the entry syncs cleanly between the Unix replicas, then fails **forever** on Windows with
+`syncing: name is invalid, contains Windows reserved character`. The file never lands there and
+the folder never reaches a clean state. Nothing warns you at creation time.
+
+- **Never use** `< > : " / \ | ? *` or control characters anywhere in a name. `:` and `|` are the
+  ones that slip in most often — from timestamps, and from web page titles saved to disk.
+- **No trailing space or trailing dot.** Windows silently strips both, so `Draft ` and `Draft`
+  collide.
+- **Avoid the reserved device names** `CON`, `PRN`, `AUX`, `NUL`, `COM0`-`COM9`, `LPT0`-`LPT9`.
+  They are reserved with any extension too: `NUL.md` is as unusable as `NUL`.
+- **Case alone never distinguishes two entries.** Both macOS and Windows are case-insensitive, so
+  `Notes.md` and `notes.md` cannot coexist in one directory — only Linux would keep them apart.
+- **Never name anything in the shape `NAME~N.EXT`** (`PAGE_2~4.JPG`, `REPORT~1.DOC`). NTFS
+  auto-generates exactly that shape as the hidden 8.3 short name of every long filename, and it
+  refuses to create a real file whose name collides with a sibling's generated short name. The
+  failure is invisible in advance — which sibling gets which alias depends on directory order —
+  and it surfaces on Windows as `syncing: finishing: replacing file: file does not exist`, with the
+  content fully downloaded and stuck in a `~syncthing~*.tmp`. Such names usually arrive from old
+  FAT-era transfers; rename them on import. `dir /x` on Windows lists the generated short names.
+- The 100-character ceiling above is partly this rule: deep nesting plus long names runs into
+  Windows path limits, and the limit applies to the whole path, not the single name.
+
+When importing anything named by an external tool — a saved web page, an export, a scanned batch —
+rename it on the way in. That is what `inbox/` processing is for.
+
 
 ## Synchronization
 
