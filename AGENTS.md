@@ -37,8 +37,11 @@ The PARA component contains the `1-projects/`, `2-areas/`, `3-resources/`, `4-ar
 The Zettelkasten component is in `0-cards/`. `0-cards/` follows the structure of an *Obsidian* project, where markdowns with links form the knowledge web. Our vault is not constrained by Obsidian functionality and we can also have links to other contents outside `0-cards/`.
 
 - A card is named `YYYYMMDD Title.md` (creation date).
-- Cards are categorized as fleeting or permanent, and labelled by YAML frontmatter (type: fleeting|permanent).
-- Fleeting cards should be processed within 48h, either dropped or transformed into permanent cards.
+- Every card is permanent, labelled by YAML frontmatter (`type: permanent`). There are no fleeting
+  cards: `inbox/` is the fleeting layer, and an unfinished thought waits there, not in `0-cards/`.
+- A card holds one idea, and its title states that idea as a claim.
+- Processing `inbox/` includes distilling cards: a note or diary entry that carries an idea yields a
+  card that links back to its source.
 
 
 ## Naming
